@@ -10,23 +10,24 @@
 ```
 sudo docker run \
     --rm \
-    --name vbox_websrv_1 \
+    --name vbox_websrv_init \
     -e USE_KEY=0 \
     -v $(pwd)/ssh:/root/.ssh \
     -v $(pwd)/init_run.sh:/run.sh \
     -it \
     jazzdd/vboxwebsrv \
-    subhrendu@192.168.2.5
+    <USERNAME V>@<vv.vv.vv.vv>
 ```
+## Command
 
 ```
 sudo docker run --name vbox_http --restart=always \
     -p 8080:80 \
     -e TZ=Europe/Paris \
-    -e ID_HOSTPORT=192.168.2.5:18083 \
+    -e ID_HOSTPORT=<vv.vv.vv.vv>:18083 \
     -e ID_NAME=subhrendu \
-    -e ID_USER=subhrendu \
-    -e ID_PW='265555' \
+    -e ID_USER=<USERNAME V> \
+    -e ID_PW='<PASSWD V>' \
     -e CONF_browserRestrictFolders="/data,/home" \
     -d joweisberg/phpvirtualbox
 ```
@@ -55,7 +56,7 @@ services:
     vbox_websrv:
         container_name: vbox_websrv_1
         image: jazzdd/vboxwebsrv
-        command: subhrendu@127.0.0.1
+        command: <USERNAME V>@<vv.vv.vv.vv>
         restart: always
         environment:
             - USE_KEY: 1

@@ -4,18 +4,18 @@ services:
         container_name: vbox_http
         image: joweisberg/phpvirtualbox
         restart: always
-        depends_on:
-            - vbox_websrv
+#        depends_on:
+#            - vbox_websrv
         ports:
             - 8080:80
         environment:
-            - TZ: "Asia/Kolkata"
-            - SRV1_HOSTPORT: "vbox_websrv_1:18083"
-            - SRV1_NAME: "Server1"
-            - SRV1_USER: "user1"
-            - SRV1_PW: "test"
-            - CONF_browserRestrictFolders: "/home,/usr/lib/virtualbox,"
-            - CONF_noAuth: "true"
+            TZ: "Asia/Kolkata"
+            SRV1_HOSTPORT: "192.168.2.5:18083"
+            SRV1_NAME: "Server1"
+            SRV1_USER: "subhrendu"
+            SRV1_PW: "265555"
+            CONF_browserRestrictFolders: "/home,/usr/lib/virtualbox,"
+            CONF_noAuth: "true"
 
     vbox_websrv:
         container_name: vbox_websrv_1

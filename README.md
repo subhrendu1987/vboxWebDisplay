@@ -1,13 +1,23 @@
 # vboxWebDisplay
 ## Scenario
 ```
-{[phpVboxDocker] [DisplayServer]} <----> [VM Server  ]
+{[phpVboxDocker (P)] [WebServer (W)]} <----> [VM Server (V)]
 
-{[zz.zz.zz.zz  ] [xx.xx.xx.xx  ]} <----> [yy.yy.yy.yy]
+{[pp.pp.pp.pp  ] [ww.ww.ww.ww  ]} <----> [vv.vv.vv.vv]
 ```
 
-## Command
-
+## Setup SSH key-pair between `docker-WebServ (W)` and `VM (V)`
+```
+sudo docker run \
+    --rm \
+    --name vbox_websrv_1 \
+    -e USE_KEY=0 \
+    -v $(pwd)/ssh:/root/.ssh \
+    -v $(pwd)/init_run.sh:/run.sh \
+    -it \
+    jazzdd/vboxwebsrv \
+    subhrendu@192.168.2.5
+```
 
 ```
 sudo docker run --name vbox_http --restart=always \

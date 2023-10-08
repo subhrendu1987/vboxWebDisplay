@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3"
 services:
     vbox_http:
         container_name: vbox_http
@@ -16,14 +16,15 @@ services:
             SRV1_PW: "265555"
             CONF_browserRestrictFolders: "/home,/usr/lib/virtualbox,"
             CONF_noAuth: "true"
-
-
-#    vbox_websrv:
-#        container_name: vbox_websrv_1
-#        image: jazzdd/vboxwebsrv
-#        command: subhrendu@127.0.0.1
-#        restart: always
-#        environment:
-#            - USE_KEY: 1
-#        volumes:
-#            - "./ssh:/root/.ssh"
+    
+    vbox_websrv-init:
+        image: jazzdd/vboxwebsrv
+        container_name: vbox_websrv_1
+        command: subhrendu@192.168.2.5
+        stdin_open: true
+        tty: true
+        environment:
+        - USE_KEY=0
+        volumes:
+            - "./ssh:/root/.ssh"
+            - "./init_run.sh:/root/run.sh"

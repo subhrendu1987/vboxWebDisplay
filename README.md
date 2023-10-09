@@ -6,7 +6,7 @@
 {[pp.pp.pp.pp  ] [ww.ww.ww.ww  ]} <----> [vv.vv.vv.vv]
 ```
 
-## Setup SSH key-pair between `docker-WebServ (W)` and `VM (V)`
+## Setup SSH key-pair between `docker-WebServ (W)` and `VM (V)` (Not Working)
 ```
 sudo docker run \
     --rm \
@@ -45,21 +45,31 @@ services:
         ports:
             - 8080:80
         environment:
-            - TZ:"Asia/Kolkata"
-            - SRV1_HOSTPORT:"vbox_websrv_1:18083"
-            - SRV1_NAME:"Server1"
-            - SRV1_USER:"user1"
-            - SRV1_PW:"test"
-            - CONF_browserRestrictFolders:"/home,/usr/lib/virtualbox,"
-            - CONF_noAuth:"true"
+            TZ: "Asia/Kolkata"
+            SRV1_HOSTPORT: "vbox_websrv_1:18083"
+            SRV1_NAME: "Server1"
+            SRV1_USER: "user1"
+            SRV1_PW: "test"
+            CONF_browserRestrictFolders: "/home,/usr/lib/virtualbox,"
+            CONF_noAuth: "true"
 
     vbox_websrv:
         container_name: vbox_websrv_1
-        image: jazzdd/vboxwebsrv
+        build:
+            context: .
+            dockerfile: Dockerfile-vboxwebsrv
+        image: vboxwebsrv
         command: <USERNAME V>@<vv.vv.vv.vv>
-        restart: always
+        #restart: always
         environment:
-            - USE_KEY: 1
+            - USE_KEY=1
+            - SSH_PORT=22
+            - SSH_PASSWD=<PASSWORD V>
         volumes:
-            - "./ssh:/root/.ssh"
+            #- "./ssh:/root/.ssh"
+            - "./init_run.sh:/run.sh"
+        #stdin_open: true
+        #tty: true
+        #entrypoint: ["bash"]
+        #command: ["tail", "-f", "/dev/null"]
 ```

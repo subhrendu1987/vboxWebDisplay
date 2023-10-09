@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3"
 services:
     vbox_http:
         container_name: vbox_http
@@ -32,6 +32,7 @@ services:
         volumes:
             #- "./ssh:/root/.ssh"
             - "./init_run.sh:/run.sh"
+        network_mode: host
         #stdin_open: true
         #tty: true
         #entrypoint: ["bash"]

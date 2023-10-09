@@ -19,11 +19,20 @@ services:
 
     vbox_websrv:
         container_name: vbox_websrv_1
-        image: jazzdd/vboxwebsrv
-        command: subhrendu@192.168.2.5
-        restart: always
-        
+        build:
+            context: .
+            dockerfile: Dockerfile-vboxwebsrv
+        image: vboxwebsrv
+        command: subhrendu@192.168.0.103
+        #restart: always
         environment:
             - USE_KEY=1
+            - SSH_PORT=22
+            - SSH_PASSWD=265555
         volumes:
-            - "./ssh:/root/.ssh"
+            #- "./ssh:/root/.ssh"
+            - "./init_run.sh:/run.sh"
+        #stdin_open: true
+        #tty: true
+        #entrypoint: ["bash"]
+        #command: ["tail", "-f", "/dev/null"]

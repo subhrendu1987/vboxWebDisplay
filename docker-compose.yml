@@ -12,7 +12,7 @@ services:
             - 8080:80
         environment:
             TZ: "Asia/Kolkata"
-            SRV1_HOSTPORT: "vbox_websrv_1:18083"
+            SRV1_HOSTPORT: "117.205.64.220:18083"
             SRV1_NAME: "Server1"
             SRV1_USER: "user1"
             SRV1_PW: "test"
@@ -33,8 +33,7 @@ services:
         volumes:
             #- "./ssh:/root/.ssh"
             - "./init_run.sh:/run.sh"
-        networks:
-            - mynetwork
+        network_mode:host
         #stdin_open: true
         #tty: true
         #entrypoint: ["bash"]

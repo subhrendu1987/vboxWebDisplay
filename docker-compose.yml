@@ -6,6 +6,8 @@ services:
         restart: always
         depends_on:
             - vbox_websrv
+        networks:
+            - mynetwork
         ports:
             - 8080:80
         environment:
@@ -16,24 +18,27 @@ services:
             SRV1_PW: "test"
             CONF_browserRestrictFolders: "/home,/usr/lib/virtualbox,"
             CONF_noAuth: "true"
-
     vbox_websrv:
         container_name: vbox_websrv_1
         build:
             context: .
             dockerfile: Dockerfile-vboxwebsrv
         image: vboxwebsrv
-        command: "subhrendu@192.168.0.103"
+        command: "server2@192.168.150.221"
         #restart: always
         environment:
             - USE_KEY=1
             - SSH_PORT=22
-            - SSH_PASSWD=265555
+            - SSH_PASSWD=idrbt
         volumes:
             #- "./ssh:/root/.ssh"
             - "./init_run.sh:/run.sh"
-        network_mode: host
+        networks:
+            - mynetwork
         #stdin_open: true
         #tty: true
         #entrypoint: ["bash"]
         #command: ["tail", "-f", "/dev/null"]
+networks:
+  mynetwork:
+    driver: bridge

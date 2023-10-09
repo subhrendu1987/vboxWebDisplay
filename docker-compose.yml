@@ -33,7 +33,7 @@ services:
         volumes:
             #- "./ssh:/root/.ssh"
             - "./init_run.sh:/run.sh"
-        network_mode:host
+        network_mode: host
         #stdin_open: true
         #tty: true
         #entrypoint: ["bash"]

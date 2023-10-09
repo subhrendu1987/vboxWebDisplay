@@ -1,4 +1,4 @@
-# $ sudo docker build -t vboxwebsrv .
+# $ sudo docker build -f Dockerfile-vboxwebsrv -t vboxwebsrv .
 FROM alpine
 MAINTAINER Christian Gatzlaff <cgatzlaff@gmail.com>
 
